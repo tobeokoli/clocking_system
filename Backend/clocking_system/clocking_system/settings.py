@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-oxv#u+)3qnmi0a&#w7bx1^^836^1-3kfsopx-nim#p63e!==&y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', '127.0.0.1:5173']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'api',
     'users',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -50,9 +51,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'clocking_system.urls'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # Replace with your Vue.js app's URL
+    # Add more allowed origins if needed
+]
 
 TEMPLATES = [
     {
