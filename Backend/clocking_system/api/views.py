@@ -19,7 +19,6 @@ def clock_in(request):
     user = authenticate(username=username, password=password)
 
     
-    user = authenticate(username=username, password=password)
     if user is not None:
         # do something
         today = date.today()

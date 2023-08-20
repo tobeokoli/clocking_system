@@ -18,6 +18,7 @@ class CustomUser(AbstractUser):
 
         from api.models import Signing
         user_signings = Signing.objects.filter(
+            user=user,
             date__gte=current_month,
             date__lt=next_month,
             clock_out_time__isnull=False
@@ -36,3 +37,8 @@ class CustomUser(AbstractUser):
         # asumming a user is only paid full salary for 160hours of work in a month
         salary_so_far = (total_hours * self.salary) / 160
         return salary_so_far
+    
+    def save(self, *args, **kwargs):
+        if not self.pk:  # Only hash password if it's a new instance
+            self.set_password(self.password)
+        return super().save(*args, **kwargs)
